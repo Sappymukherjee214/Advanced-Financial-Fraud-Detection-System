@@ -170,7 +170,7 @@ with tab_insights:
                 hole=0.4
             )
             fig_pie.update_layout(paper_bgcolor='#0d0f12', plot_bgcolor='#0d0f12', font_color='#e2e8f0')
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(fig_pie, width="stretch")
             
         with col_g2:
             # Transaction Amount distribution log scale
@@ -187,7 +187,7 @@ with tab_insights:
             fig_hist.update_layout(paper_bgcolor='#0d0f12', plot_bgcolor='#0d0f12', font_color='#e2e8f0')
             new_names = {'0': 'Legit', '1': 'Fraud'}
             fig_hist.for_each_trace(lambda t: t.update(name = new_names[t.name]))
-            st.plotly_chart(fig_hist, use_container_width=True)
+            st.plotly_chart(fig_hist, width="stretch")
 
         col_g3, col_g4 = st.columns(2)
         with col_g3:
@@ -203,7 +203,7 @@ with tab_insights:
                 color_discrete_sequence=px.colors.qualitative.Pastel
             )
             fig_prod.update_layout(paper_bgcolor='#0d0f12', plot_bgcolor='#0d0f12', font_color='#e2e8f0')
-            st.plotly_chart(fig_prod, use_container_width=True)
+            st.plotly_chart(fig_prod, width="stretch")
             
         with col_g4:
             # Fraud rate by hour of day
@@ -220,7 +220,7 @@ with tab_insights:
             )
             fig_hour.update_traces(line_color='#38bdf8', marker_color='#38bdf8')
             fig_hour.update_layout(paper_bgcolor='#0d0f12', plot_bgcolor='#0d0f12', font_color='#e2e8f0')
-            st.plotly_chart(fig_hour, use_container_width=True)
+            st.plotly_chart(fig_hour, width="stretch")
 
 # -------------------------------------------------------------
 # TAB 2: Model Performance Analysis
@@ -257,7 +257,7 @@ with tab_performance:
         
     st.dataframe(
         df_metrics.style.background_gradient(cmap='Blues', subset=['ROC-AUC', 'PR-AUC', 'F1-Score']),
-        use_container_width=True
+        width="stretch"
     )
     
     # Feature Importance Plot
@@ -277,7 +277,7 @@ with tab_performance:
             color_continuous_scale='Blues'
         )
         fig_feat.update_layout(paper_bgcolor='#0d0f12', plot_bgcolor='#0d0f12', font_color='#e2e8f0', yaxis={'categoryorder':'total ascending'})
-        st.plotly_chart(fig_feat, use_container_width=True)
+        st.plotly_chart(fig_feat, width="stretch")
     else:
         st.info("Feature importance will be plotted here once the machine learning models are trained in the notebook.")
 
@@ -434,4 +434,4 @@ with tab_simulator:
                 labels={'Contribution': 'Weight Contribution to Prediction', 'Feature Condition': 'Feature Condition'}
             )
             fig_exp.update_layout(paper_bgcolor='#0d0f12', plot_bgcolor='#0d0f12', font_color='#e2e8f0')
-            st.plotly_chart(fig_exp, use_container_width=True)
+            st.plotly_chart(fig_exp, width="stretch")
