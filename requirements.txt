@@ -1,0 +1,17 @@
+pandas
+numpy
+scikit-learn
+xgboost
+lightgbm
+catboost
+optuna
+shap
+lime
+plotly
+streamlit
+fastapi
+uvicorn
+tensorflow-cpu
+torch
+imbalanced-learn
+pydantic
