@@ -19,6 +19,7 @@ preprocessor = None
 best_model = None
 lime_explainer = None
 risk_scorer = FraudRiskScorer()
+train_cols = []
 
 MODEL_DIR = "d:/Advanced Financial Fraud Detection System/models"
 PREPROCESSOR_PATH = os.path.join(MODEL_DIR, "preprocessor.pkl")
@@ -46,7 +47,7 @@ class TransactionPayload(BaseModel):
 
 @app.on_event("startup")
 def load_assets():
-    global preprocessor, best_model, lime_explainer
+    global preprocessor, best_model, lime_explainer, train_cols
     
     if os.path.exists(PREPROCESSOR_PATH) and os.path.exists(MODEL_PATH):
         try:
@@ -59,6 +60,7 @@ def load_assets():
             train_sampled_path = "d:/Advanced Financial Fraud Detection System/data/train_sampled.csv"
             if os.path.exists(train_sampled_path):
                 df_train = pd.read_csv(train_sampled_path)
+                train_cols = [c for c in df_train.columns if c != 'isFraud']
                 X_train_proc = preprocessor.transform(df_train)
                 lime_explainer = setup_lime_explainer(
                     X_train_proc,
@@ -111,6 +113,13 @@ def predict_fraud(payload: TransactionPayload):
         }
         
     try:
+        # Align columns to have the same schema as train set (fill missing with NaN)
+        if len(train_cols) > 0:
+            for col in train_cols:
+                if col not in df_input.columns:
+                    df_input[col] = np.nan
+            df_input = df_input[train_cols]
+            
         # 3. Transform input using fitted feature engineering pipeline
         X_proc = preprocessor.transform(df_input)
         
