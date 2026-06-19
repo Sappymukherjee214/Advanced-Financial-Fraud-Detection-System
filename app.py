@@ -235,7 +235,14 @@ with tab_performance:
         with open(METRICS_FILE, 'r') as f:
             metrics_data = json.load(f)
         df_metrics = pd.DataFrame(metrics_data).T.reset_index()
-        df_metrics.rename(columns={'index': 'Model'}, inplace=True)
+        df_metrics.rename(columns={
+            'index': 'Model',
+            'precision': 'Precision',
+            'recall': 'Recall',
+            'f1': 'F1-Score',
+            'roc_auc': 'ROC-AUC',
+            'pr_auc': 'PR-AUC'
+        }, inplace=True)
     else:
         # Benchmark results from runs matching project requirements
         data = {
