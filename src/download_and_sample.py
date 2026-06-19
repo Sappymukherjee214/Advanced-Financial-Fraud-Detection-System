@@ -4,7 +4,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 def sample_dataset():
-    data_dir = "d:/Advanced Financial Fraud Detection System/data"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    data_dir = os.path.join(base_dir, "data")
     os.makedirs(data_dir, exist_ok=True)
     
     train_trans_path = os.path.join(data_dir, "train_transaction.csv")

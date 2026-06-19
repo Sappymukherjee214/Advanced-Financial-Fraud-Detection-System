@@ -67,8 +67,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Define paths
-DATA_DIR = "d:/Advanced Financial Fraud Detection System/data"
-MODEL_DIR = "d:/Advanced Financial Fraud Detection System/models"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+MODEL_DIR = os.path.join(BASE_DIR, "models")
 TRAIN_PATH = os.path.join(DATA_DIR, "train_sampled.csv")
 MODEL_PATH = os.path.join(MODEL_DIR, "best_model.pkl")
 PREPROCESSOR_PATH = os.path.join(MODEL_DIR, "preprocessor.pkl")

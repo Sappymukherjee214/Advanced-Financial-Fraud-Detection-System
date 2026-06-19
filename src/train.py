@@ -22,8 +22,9 @@ from src.models import (
 )
 
 def run_pipeline():
-    data_dir = "d:/Advanced Financial Fraud Detection System/data"
-    model_dir = "d:/Advanced Financial Fraud Detection System/models"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    data_dir = os.path.join(base_dir, "data")
+    model_dir = os.path.join(base_dir, "models")
     os.makedirs(model_dir, exist_ok=True)
     
     train_path = os.path.join(data_dir, "train_sampled.csv")

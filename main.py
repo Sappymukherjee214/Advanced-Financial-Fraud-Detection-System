@@ -21,7 +21,8 @@ lime_explainer = None
 risk_scorer = FraudRiskScorer()
 train_cols = []
 
-MODEL_DIR = "d:/Advanced Financial Fraud Detection System/models"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
 PREPROCESSOR_PATH = os.path.join(MODEL_DIR, "preprocessor.pkl")
 MODEL_PATH = os.path.join(MODEL_DIR, "best_model.pkl")
 
@@ -57,7 +58,7 @@ def load_assets():
                 best_model = pickle.load(f)
             
             # Setup LIME Explainer using a small background dataset from training data
-            train_sampled_path = "d:/Advanced Financial Fraud Detection System/data/train_sampled.csv"
+            train_sampled_path = os.path.join(BASE_DIR, "data", "train_sampled.csv")
             if os.path.exists(train_sampled_path):
                 df_train = pd.read_csv(train_sampled_path)
                 train_cols = [c for c in df_train.columns if c != 'isFraud']
